@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+   <body>
+   
+      <h3>add a wear for an item</h3>
+
+      <p>
+        <a href = "{{ url_for('show_all') }}"> see all </a>
+      </p>
+      <hr/>
+      
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+
+      <p>for now select one by one will make this more dynamic later</p>
+      
+      <form action = "{{ request.path }}" method="post">
+         {{ form.csrf_token }}
+         {{ form.category }}
+         {{ form.type }}
+         {{ form.brand }}
+         {{ form.color }}
+         <input type="submit" value="submit">
+      </form>
+      <script>
+         let category_select = document.getElementById('category')
+         let type_select = document.getElementById('type')
+         let brand_select = document.getElementById('brand')
+         let color_select = document.getElementById('color')
+         blank = ' '
+
+         //category changes type
+         // TODO category changes brand, color
+         category_select.onchange = function() {
+            category = category_select.value;
+            fetch('/type/' + category).then(function(response){ //getting the json that type/category gives you
+               response.json().then(function(data) {
+                  let optionHTML = '';
+                  optionHTML += '<option value="choose a category">choose a category</option>';
+                  for (let type of data.types) {
+                     console.log(type)
+                     optionHTML += '<option value="' + type + '">' + type + '</option>';
+                  }
+                  type_select.innerHTML = optionHTML;
+               });
+            });
+         }
+
+         //type changes brand
+         // TODO type changes category, color 
+         type_select.onchange = function() {
+            type = type_select.value;
+         fetch('/brand/' + type + '/' + category).then(function(response){ //getting the json that type/category gives you
+               response.json().then(function(data) {
+                  let optionHTML = '';
+                  optionHTML += '<option value="choose a brand">choose a brand</option>';
+                  for (let brand of data.brands) {
+                     console.log(brand)
+                     optionHTML += '<option value="' + brand + '">' + brand + '</option>';
+                  }
+                  brand_select.innerHTML = optionHTML;
+               });
+            });
+         }
+
+         // brand changes color
+         // TODO brand changes category, type
+         brand_select.onchange = function() {
+            brand = brand_select.value;
+         fetch('/color/' + brand + '/' + type + '/' + category).then(function(response){ //getting the json that type/category gives you
+               response.json().then(function(data) {
+                  let optionHTML = '';
+                  optionHTML += '<option value="choose a color">choose a color</option>';
+                  for (let color of data.colors) {
+                     console.log(color)
+                     optionHTML += '<option value="' + color + '">' + color + '</option>';
+                  }
+                  color_select.innerHTML = optionHTML;
+               });
+            });
+         }
+
+      </script>
+      
+   </body>
+</html>

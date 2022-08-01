@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+      
+      <h3>
+         <a> welcome to ur clothing tracker :)</a>
+      </h3>
+
+      <p>
+        <a href = "{{ url_for('new_item') }}"> add a new item </a>
+      </p>
+
+      <p>
+         <a href = "{{ url_for('new_wear') }}"> add a new wear </a>
+       </p>
+       
+       <p>
+         <a href = "{{ url_for('show_all') }}"> all clothes </a>
+       </p>
+
+      
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+
+      <table>
+         <thead>
+            <tr>
+               <th>type</th>
+               <th>brand</th>
+               <th>color</th>
+               <th>wears</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for item in clothes %}
+               <tr>
+                  <td>{{ item.type }}</td>
+                  <td>{{ item.brand }}</td>
+                  <td>{{ item.color }}</td>
+                  <td>{{ item.wears }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      
+   </body>
+</html>
