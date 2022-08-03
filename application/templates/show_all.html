@@ -9,27 +9,26 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="/static/css/page.css">
    </head>
-   <body>
+
       
       <h3>
          <a href = "{{ url_for('show_all') }}"> welcome to ur clothing tracker :)</a>
       </h3>
+      <p>
+        <a href = "{{ url_for('new_item') }}"> new item </a>
+      </p>
+      <p>
+        <a href = "{{ url_for('new_wear') }}"> new wear </a>
+      </p>
 
-      <p>
-        <a href = "{{ url_for('new_item') }}"> add a new item </a>
-      </p>
-      <p>
-        <a href = "{{ url_for('new_wear') }}"> add a new wear </a>
-      </p>
-      
       <hr/>
-      <p>todo: sort on what is worn the most, buttons to sort by category/type etc.</p>
-      <p>also worn the most in a time period (past month, week, year)</p>
+
       
       {%- for message in get_flashed_messages() %}
          {{ message }}
       {%- endfor %}
 
+      <div class="the_table">
       <table>
          <thead>
             <tr>
@@ -53,7 +52,14 @@
             {% endfor %}
          </tbody>
       </table>
-    
+      </div>
+
+      <hr/>
+
+      <p>todo: sort on what is worn the most, buttons to sort by category/type etc <br> 
+        also worn the most in a time period (past month, week, year), <br>
+        login functonality
+    </p>
       
     <!-- Optional JavaScript -->
     <script src="main.js"></script>

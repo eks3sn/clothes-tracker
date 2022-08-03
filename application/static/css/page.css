@@ -2,4 +2,22 @@ body {
     max-width: max-content;
     margin: auto;
     padding-top: 100px;
+    background-color: rgb(248, 249, 250);
+}
+
+.the_table {
+    border: none;
+    margin: auto;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
   }
+
+th, td {
+    width: 150px;
+}
+

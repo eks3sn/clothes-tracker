@@ -16,6 +16,9 @@
       <p>
         <a href = "{{ url_for('show_all') }}"> see all </a>
       </p>
+      <p>
+         <a href = "{{ url_for('new_item') }}"> new item </a>
+       </p>
       <hr/>
       
       {%- for category, message in get_flashed_messages(with_categories = true) %}
